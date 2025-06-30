@@ -1,0 +1,55 @@
+╔═══════════════════════════════════════╗  ╔═══════════════════════════════════════╗
+║            📘 Java String             ║  ║           🔣 Char Utilities           ║
+╚═══════════════════════════════════════╝  ╚═══════════════════════════════════════╝
+String s = "hello";                         char ch = 'A';
+int len = s.length();                       Character.isLetter(ch);
+boolean isEmpty = s.isEmpty();              Character.isDigit(ch);
+char c = s.charAt(0);                       Character.isLetterOrDigit(ch);
+String sub = s.substring(1, 3);             Character.isWhitespace(ch);
+
+int idx = s.indexOf("e");                   Character.toLowerCase(ch);
+int lastIdx = s.lastIndexOf("l");           Character.toUpperCase(ch);
+
+boolean has = s.contains("lo");             String fromChar = String.valueOf('Z');
+boolean sw = s.startsWith("he");
+boolean ew = s.endsWith("lo");
+
+boolean eq = s.equals("hello");             ╔═══════════════════════════════════════╗
+boolean eqIgnore = s.equalsIgnoreCase("HELLO"); ║           🧱 StringBuilder            ║
+int cmp = s.compareTo("world");             ╚═══════════════════════════════════════╝
+int cmpIgnore = s.compareToIgnoreCase("HELLO"); StringBuilder sb = new StringBuilder("abc");
+
+String lower = s.toLowerCase();             sb.append("def");     // "abcdef"
+String upper = s.toUpperCase();             sb.insert(1, "X");    // "aXbcdef"
+String trimmed = s.trim();                  sb.replace(1, 3, "ZZ");// "aZZdef"
+                                            sb.delete(1, 2);      // "aZdef"
+                                            sb.reverse();         // "fedZa"
+╔═══════════════════════════════════════╗  String result = sb.toString();
+║       🛠️ Replace & Convert            ║
+╚═══════════════════════════════════════╝  ╔═══════════════════════════════════════╗
+String r1 = s.replace("l", "x");            ║     🧼 Common DSA String Filters      ║
+String r2 = s.replaceFirst("l", "x");       ╚═══════════════════════════════════════╝
+String r3 = s.replaceAll("l", "x");         // ✅ Keep only letters + digits
+                                            String filtered = s.replaceAll("[^a-zA-Z0-9]", "");
+String[] parts = s.split("e");              char[] arr = filtered.toCharArray();
+String joined = String.join("-", parts);
+
+char[] arr2 = s.toCharArray();              // ❌ Remove only spaces
+String formatted = String.format("%s-%d", s, 42); String noSpaces = s.replace(" ", "");
+
+                                            // 🔠 Keep only letters
+                                            String lettersOnly = s.replaceAll("[^a-zA-Z]", "");
+
+                                            // 🔢 Keep only digits
+                                            String digitsOnly = s.replaceAll("[^0-9]", "");
+
+╔═══════════════════════════════════════╗  // 🔁 Manual filtering with loop
+║     🔁 Manual Alphanumeric Filter     ║  StringBuilder clean = new StringBuilder();
+╚═══════════════════════════════════════╝  for (char ch : s.toCharArray()) {
+StringBuilder sb2 = new StringBuilder();       if (Character.isLetterOrDigit(ch)) {
+for (char ch : s.toCharArray()) {                  clean.append(ch);
+    if (Character.isLetterOrDigit(ch)) {       }
+        sb2.append(ch);                    }
+    }                                   String filteredManual = clean.toString();
+}
+String cleanString = sb2.toString();
