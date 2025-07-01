@@ -1,0 +1,49 @@
+╔══════════════════════════════════════════╗  ╔═════════════════════════════════════════╗
+║      📦 Java Collections LinkedList      ║  ║           🧱 Basic Node Structure        ║
+╚══════════════════════════════════════════╝  ╚═════════════════════════════════════════╝
+LinkedList<Integer> list = new LinkedList<>(); class ListNode {
+list.add(1); list.addFirst(0);                   int val;
+list.addLast(2); list.removeFirst();             ListNode next;
+list.removeLast(); list.get(0);                  ListNode(int x) { val = x; }
+                                                 }
+
+System.out.println(list); // [0,1,2]
+
+╔══════════════════════════════════════════╗  ╔═════════════════════════════════════════╗
+║      🔁 Traverse (Collection)            ║  ║        🔁 Traverse (Manual Node)         ║
+╚══════════════════════════════════════════╝  ╚═════════════════════════════════════════╝
+for (int val : list) {                        ListNode head = new ListNode(1);
+    System.out.print(val);                    head.next = new ListNode(2);
+}                                             head.next.next = new ListNode(3);
+
+Iterator<Integer> it = list.iterator();       while (head != null) {
+while (it.hasNext())                             System.out.print(head.val);
+    System.out.print(it.next());                 head = head.next;
+}                                             }
+
+╔══════════════════════════════════════════╗  ╔═════════════════════════════════════════╗
+║     ✍️ Common Operations (Collection)     ║  ║     🔧 Insert at Position (Node)         ║
+╚══════════════════════════════════════════╝  ╚═════════════════════════════════════════╝
+list.add(index, val);  // insert at index     ListNode insert(ListNode head, int val, int pos) {
+list.remove(index);                           if (pos == 0) {
+list.contains(val);                              ListNode newNode = new ListNode(val);
+list.size();                                      newNode.next = head;
+                                                  return newNode;
+list.peekFirst();  // view first              }
+list.peekLast();   // view last               ListNode curr = head;
+                                              for (int i = 0; i < pos - 1 && curr != null; i++)
+                                                  curr = curr.next;
+                                              ListNode newNode = new ListNode(val);
+                                              newNode.next = curr.next;
+                                              curr.next = newNode;
+                                              return head;
+}
+
+╔══════════════════════════════════════════╗  ╔═════════════════════════════════════════╗
+║      🚀 Tips & Use Cases                 ║  ║        📌 DSA Applications               ║
+╚══════════════════════════════════════════╝  ╚═════════════════════════════════════════╝
+✔ Fast insertion/deletion at head/tail      ✅ Reversing a list
+✔ Avoids resizing like ArrayList            ✅ Cycle detection (Floyd’s)
+✔ Doubly LinkedList (Java)                  ✅ Merge/Sort/Rotate Linked Lists
+✔ Stack/Queue base structure
+
