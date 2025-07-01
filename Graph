@@ -1,0 +1,50 @@
+╔══════════════════════════════════════════╗  ╔═════════════════════════════════════════╗
+║       🧱 Graph Representation            ║  ║       🔗 Adjacency List Creation         ║
+╚══════════════════════════════════════════╝  ╚═════════════════════════════════════════╝
+int V = 5;                                     List<List<Integer>> graph = new ArrayList<>();
+List<List<Integer>> graph;                     for (int i = 0; i < V; i++)
+graph = new ArrayList<>(V);                        graph.add(new ArrayList<>());
+
+graph.get(0).add(1); // Edge 0 → 1             // Undirected:
+graph.get(1).add(0); // Edge 1 → 0             graph.get(u).add(v);
+                                                 graph.get(v).add(u);
+
+╔══════════════════════════════════════════╗  ╔═════════════════════════════════════════╗
+║         🔁 DFS / BFS Traversals          ║  ║        🧠 Topological Sort (DFS)         ║
+╚══════════════════════════════════════════╝  ╚═════════════════════════════════════════╝
+boolean[] visited = new boolean[V];            Stack<Integer> stack = new Stack<>();
+void dfs(int node) {                           boolean[] visited = new boolean[V];
+    if (visited[node]) return;                 void topo(int u) {
+    visited[node] = true;                          visited[u] = true;
+    for (int nei : graph.get(node))               for (int v : graph.get(u))
+        dfs(nei);                                     if (!visited[v]) topo(v);
+}                                                  stack.push(u);
+                                               }
+
+Queue<Integer> q = new LinkedList<>();         // Also: Kahn's algorithm for topo sort
+q.offer(start); visited[start] = true;
+while (!q.isEmpty()) {
+    int cur = q.poll();
+    for (int nei : graph.get(cur)) {
+        if (!visited[nei]) {
+            visited[nei] = true;
+            q.offer(nei);
+        }
+    }
+}
+
+╔══════════════════════════════════════════╗  ╔═════════════════════════════════════════╗
+║         📌 Graph Use Cases               ║  ║       🧩 Graph Problems (DSA)            ║
+╚══════════════════════════════════════════╝  ╚═════════════════════════════════════════╝
+Networks, social graphs, maps                 ✅ Connected Components
+Web crawling, scheduling, game AI            ✅ Detect Cycle (DFS or Union-Find)
+                                              ✅ Dijkstra / Bellman-Ford (Weighted)
+                                              ✅ Topo Sort, Bridges, SCCs, MST
+
+╔══════════════════════════════════════════╗  ╔═════════════════════════════════════════╗
+║        🚀 Tips & Tricks                  ║  ║         📚 Libraries (Competitive)       ║
+╚══════════════════════════════════════════╝  ╚═════════════════════════════════════════╝
+✔ Always track visited[] in BFS/DFS           Use arrays for faster graphs:
+✔ Watch for 0-based vs 1-based indices        List<Integer>[] graph = new List[n];
+✔ For weighted edges: use Pair/List<Node>     class Node { int v, w; }
+
